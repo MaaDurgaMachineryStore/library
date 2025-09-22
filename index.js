@@ -247,6 +247,21 @@ scanQrBtn.addEventListener("click", () => {
 
 // init: check stored profile
 (function init() {
+  // initialize legacy reCAPTCHA verifier if firebase global is available (per request)
+  try {
+    if (window.firebase && firebase.auth && !window.recaptchaVerifier) {
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+        'callback': (response) => {
+          console.log("reCAPTCHA verified");
+        }
+      });
+      console.log("reCAPTCHA initialized (legacy firebase.auth.RecaptchaVerifier).");
+    }
+  } catch (e) {
+    console.warn('reCAPTCHA init skipped or not available:', e);
+  }
+
   const existing = loadProfileFromStorage();
   if (existing && existing.name) {
     studentData = existing;
