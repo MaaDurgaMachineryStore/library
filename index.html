@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Library Student Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="container" role="main" aria-labelledby="app-title">
+    <header class="header">
+      <div class="logo">LS</div>
+      <div>
+        <h2 id="app-title">Library Student Portal</h2>
+        <p class="lead">Sign in with your phone to manage attendance & fees</p>
+      </div>
+    </header>
+
+    <!-- Login -->
+    <section id="login-form" class="fade-in">
+      <div class="form-row input-icon">
+        <label for="phone">Phone number</label>
+        <span class="icon">📱</span>
+        <input id="phone" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Enter phone number">
+        <p class="help">We'll send a one-time password (OTP)</p>
+      </div>
+
+      <div class="form-row">
+        <button id="send-otp" type="button">Send OTP</button>
+      </div>
+
+      <div class="form-row input-icon">
+        <label for="otp">OTP</label>
+        <span class="icon">🔐</span>
+        <input id="otp" type="text" inputmode="numeric" placeholder="Enter OTP">
+      </div>
+
+      <div class="form-row">
+        <button id="verify-otp" type="button">Verify OTP</button>
+      </div>
+    </section>
+
+    <section id="profile-form" class="hidden">
+      <div class="form-row">
+        <label for="name">Full name</label>
+        <input id="name" type="text" placeholder="Enter your name">
+      </div>
+
+      <div class="form-row">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Create a password">
+        <p class="help">Used to secure your local profile</p>
+      </div>
+
+      <div class="form-row">
+        <button id="save-profile" type="button">Save profile</button>
+      </div>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="dashboard-section">
+        <div class="row" style="align-items:flex-start;">
+          <div style="flex:1">
+            <h3>Welcome, <span id="student-name">Student</span></h3>
+            <p class="help" id="fee-status">Fee status: <strong>Not Paid</strong></p>
+          </div>
+          <div class="avatar" aria-hidden="true">S</div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <button id="pay-fee" type="button">Pay ₹500 via UPI</button>
+        </div>
+      </div>
+
+      <div class="dashboard-section">
+        <h3>Attendance</h3>
+        <ul id="attendance-list">
+          <!-- attendance dates appended here -->
+        </ul>
+      </div>
+
+      <div class="dashboard-section">
+        <button id="scan-qr" type="button">Scan Attendance QR</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- required container for Firebase reCAPTCHA (used by firebase.js / backend.js) -->
+  <div id="recaptcha-container"></div>
+
+  <!-- Load local modules in dependency order. type="module" is deferred by default. -->
+  <script type="module" src="./firebase.js"></script>
+  <script type="module" src="./backend.js"></script>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>
