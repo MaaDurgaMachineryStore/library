@@ -26,6 +26,9 @@
         <p class="help">We'll send a one-time password (OTP)</p>
       </div>
 
+      <!-- reCAPTCHA container (single instance) -->
+      <div class="form-row" id="recaptcha-container"></div>
+
       <div class="form-row">
         <button id="send-otp" type="button">Send OTP</button>
       </div>
@@ -86,10 +89,7 @@
     </section>
   </main>
 
-  <!-- required container for Firebase reCAPTCHA (used by firebase.js / backend.js) -->
-  <div id="recaptcha-container"></div>
-
-  <!-- Load local modules in dependency order. type="module" is deferred by default. -->
+  <!-- Load ES modules in correct order; backend.js will initialize reCAPTCHA via initRecaptcha -->
   <script type="module" src="./firebase.js"></script>
   <script type="module" src="./backend.js"></script>
   <script type="module" src="./index.js"></script>
